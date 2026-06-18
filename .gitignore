@@ -1,0 +1,54 @@
+# Java
+*.class
+*.log
+*.ctxt
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Environment Variables
+.env
+.env.*
+
+# Generated Files
+*.jar
+*.war
+*.ear
+
+# H2 Database
+*.mv.db
+*.trace.db
