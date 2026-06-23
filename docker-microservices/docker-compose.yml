@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  naming-server:
+    image: dev09docker/uranusv1-naming-server:0.0.1-SNAPSHOT
+    container_name: naming-server
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    restart: unless-stopped
+    networks:
+      - currency-network
+
+  currency-exchange:
+    image: dev09docker/uranusv1-currency-exchange-microservice:0.0.1-SNAPSHOT
+    container_name: currency-exchange
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - currency-network
+    environment:
+      SPRING_APPLICATION_NAME: currency-exchange-microservice
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+    depends_on:
+      - naming-server
+
+  currency-conversion:
+    image: dev09docker/uranusv1-currency-conversion-microservice:0.0.1-SNAPSHOT
+    container_name: currency-conversion
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    restart: unless-stopped
+    networks:
+      - currency-network
+    environment:
+      SPRING_APPLICATION_NAME: currency-conversion-microservice
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+    depends_on:
+      - naming-server
+      - currency-exchange
+
+  api-gateway:
+    image: dev09docker/uranusv1-api-gateway:0.0.1-SNAPSHOT
+    container_name: api-gateway
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    restart: unless-stopped
+    networks:
+      - currency-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+    depends_on:
+      - naming-server
+
+  zipkin-server:
+    image: openzipkin/zipkin:latest
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
+    networks:
+      - currency-network
+
+networks:
+  currency-network:

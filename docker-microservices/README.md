@@ -22,17 +22,17 @@ DOCKER_HOST=unix:///home/user/.docker/desktop/docker.sock ./mvnw spring-boot:bui
 
 ## Testing URLs 
 ### Currency Exchange Microservice
-[http://localhost:8000/currency-exchange/from/USD/to/INR](http://localhost:8000/currency-exchange/from/USD/to/INR)
+[http://localhost:8000/currency-exchange/from/USD/to/IND](http://localhost:8000/currency-exchange/from/USD/to/IND)
 
 ### Currency Conversion Microservice
-[http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10](http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10)
-[http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10](http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10)
+[http://localhost:8100/currency-conversion/from/USD/to/IND/quantity/10](http://localhost:8100/currency-conversion/from/USD/to/IND/quantity/10)
+[http://localhost:8100/currency-conversion-feign/from/USD/to/IND/quantity/10](http://localhost:8100/currency-conversion-feign/from/USD/to/IND/quantity/10)
 
 ### API GATEWAY
-[http://localhost:8765/currency-exchange/from/USD/to/INR](http://localhost:8765/currency-exchange/from/USD/to/INR)
-[http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/10](http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/10)
-[http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10](http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10)
-[http://localhost:8765/currency-conversion-new/from/USD/to/INR/quantity/10](http://localhost:8765/currency-conversion-new/from/USD/to/INR/quantity/10)
+[http://localhost:8765/currency-exchange/from/USD/to/IND](http://localhost:8765/currency-exchange/from/USD/to/IND)
+[http://localhost:8765/currency-conversion/from/USD/to/IND/quantity/10](http://localhost:8765/currency-conversion/from/USD/to/IND/quantity/10)
+[http://localhost:8765/currency-conversion-feign/from/USD/to/IND/quantity/10](http://localhost:8765/currency-conversion-feign/from/USD/to/IND/quantity/10)
+[http://localhost:8765/currency-conversion-new/from/USD/to/IND/quantity/10](http://localhost:8765/currency-conversion-new/from/USD/to/IND/quantity/10)
 
 ### Eureka Server
 A **Eureka server**, developed by Netflix, is **a central service registry used in microservices architectures**. It allows microservices (Eureka clients) to locate and communicate with each other dynamically without the need to hardcode IP addresses or hostnames.
@@ -42,5 +42,17 @@ A **Eureka server**, developed by Netflix, is **a central service registry used 
 **Zipkin** is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in service architectures.
 
 [http://localhost:9411/](http://localhost:9411/)
+
+## Docker
+Create containers with docker compose
+```bash
+docker-compose up
+```
+
+Restart all docker containers
+```bash
+docker-compose down
+docker-compose up
+```
 
     
